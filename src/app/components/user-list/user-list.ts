@@ -32,16 +32,14 @@ import { MatButtonModule } from '@angular/material/button';
 export class UserList implements AfterViewInit {
   private userService = inject(DataFetch);
   private router = inject(Router);
+  @ViewChild(MatSort) sort!: MatSort;
 
+  dataSource = new MatTableDataSource<User>();
   users = this.userService.users;
   editRowIndex = signal<number | null>(null);
 
   columns = computed(() => Object.keys(this.users()?.[0] || {}));
   combinedColumns = computed(() => [...this.columns(), 'actions']);
-
-  @ViewChild(MatSort) sort!: MatSort;
-
-  dataSource = new MatTableDataSource<User>();
 
   updateTableData = effect(() => {
     this.dataSource.data = this.users();
@@ -53,12 +51,6 @@ export class UserList implements AfterViewInit {
 
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
-
-    // Optional: Fix for nested values
-    this.dataSource.sortingDataAccessor = (item, property) =>
-      typeof item[property] === 'string' || typeof item[property] === 'number'
-        ? item[property]
-        : '';
   }
 
   /** Actions */

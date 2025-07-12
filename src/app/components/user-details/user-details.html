@@ -15,8 +15,8 @@
         <div mat-card-avatar class="avatar">
           <mat-icon>person</mat-icon>
         </div>
-        <mat-card-title>{{ user().name }}</mat-card-title>
-        <mat-card-subtitle>ID: {{ user().id }}</mat-card-subtitle>
+        <mat-card-title>{{ user()?.name }}</mat-card-title>
+        <mat-card-subtitle>ID: {{ user()?.id }}</mat-card-subtitle>
       </mat-card-header>
 
       <mat-divider></mat-divider>
@@ -24,16 +24,16 @@
       <mat-card-content>
         <div class="info-row">
           <mat-icon>language</mat-icon>
-          <span>{{ user().language }}</span>
+          <span>{{ user()?.language }}</span>
         </div>
         <div class="info-row">
           <mat-icon>info</mat-icon>
-          <span>Version: {{ user().version }}</span>
+          <span>Version: {{ user()?.version }}</span>
         </div>
         <div class="bio">
           <mat-icon>description</mat-icon>
           <span>Bio:</span>
-          <p>{{ user().bio }}</p>
+          <p>{{ user()?.bio }}</p>
         </div>
       </mat-card-content>
     </mat-card>

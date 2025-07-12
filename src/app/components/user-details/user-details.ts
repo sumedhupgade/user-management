@@ -26,6 +26,6 @@ export class UserDetails implements OnInit{
   }
 }
 
-  index = computed(() => Number(this.route.snapshot.paramMap.get('index')));
+  index = computed(() => Number(this.route.snapshot.paramMap.get('id')));
   user = computed<User>(() => this.users()?.[this.index()]);
 }
