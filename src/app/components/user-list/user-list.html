@@ -1,0 +1,42 @@
+@if (users().length > 0) {
+<table mat-table [dataSource]="dataSource" matSort>
+  @for (col of columns(); track col) {
+  <ng-container [matColumnDef]="col">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ col }}</th>
+    <td mat-cell *matCellDef="let row; let i = index">
+      @if (isEditing(i)) {
+      <input class="custom-input" [(ngModel)]="users()[i][col]" />
+      } @else {
+      {{ row[col] }}
+      }
+    </td>
+  </ng-container>
+  }
+
+  <!-- Action Column -->
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Actions</th>
+    <td mat-cell *matCellDef="let row; let i = index">
+      @if (isEditing(i)) {
+      <button mat-icon-button (click)="stopEditing(); $event.stopPropagation()">
+        <mat-icon>save</mat-icon>
+      </button>
+      } @else {
+      <button
+        mat-icon-button
+        (click)="startEditing(i); $event.stopPropagation()"
+      >
+        <mat-icon>edit</mat-icon>
+      </button>
+      }
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="combinedColumns()"></tr>
+  <tr
+    mat-row
+    *matRowDef="let row; columns: combinedColumns()"
+    (click)="goToDetail(rowIndex(row))"
+  ></tr>
+</table>
+}

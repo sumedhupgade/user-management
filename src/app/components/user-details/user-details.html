@@ -1,0 +1,44 @@
+<div class="user-detail-wrapper">
+
+  <!-- Top Back Button -->
+  <div class="top-bar">
+    <button mat-button color="primary" routerLink="/">
+      <mat-icon>arrow_back</mat-icon>
+      Back to List
+    </button>
+  </div>
+
+  <!-- Card Content -->
+  @if (user()) {
+    <mat-card class="user-card">
+      <mat-card-header>
+        <div mat-card-avatar class="avatar">
+          <mat-icon>person</mat-icon>
+        </div>
+        <mat-card-title>{{ user().name }}</mat-card-title>
+        <mat-card-subtitle>ID: {{ user().id }}</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-divider></mat-divider>
+
+      <mat-card-content>
+        <div class="info-row">
+          <mat-icon>language</mat-icon>
+          <span>{{ user().language }}</span>
+        </div>
+        <div class="info-row">
+          <mat-icon>info</mat-icon>
+          <span>Version: {{ user().version }}</span>
+        </div>
+        <div class="bio">
+          <mat-icon>description</mat-icon>
+          <span>Bio:</span>
+          <p>{{ user().bio }}</p>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  } @else {
+    <p class="no-user">User not found.</p>
+  }
+
+</div>
